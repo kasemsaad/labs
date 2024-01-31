@@ -1,0 +1,68 @@
+1.
+sudo a2dismod mpm_event
+systemctl restart apache2
+
+sudo apache2ctl -M
+
+ filter_module (shared)
+ mime_module (shared)
+ mpm_worker_module (shared)
+ negotiation_module (shared)
+ reqtimeout_module (shared)
+ setenvif_module (shared)
+
+2.sudo a2enmod rewrite
+systemctl restart apache2
+
+sudo apache2ctl -M |grep rew
+
+[sudo] password for eng_kasem: 
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.1.1. Set the 'ServerName' directive globally to suppress this message
+ rewrite_module (shared)
+
+3.
+a.
+sudo touch .htaccess
+sudo nano .htacess
+a.
+RewriteEngine On
+RewriteCond "%{QUERY_STRING}" "^forbidden"
+RewriteRule "^(.*)$" "page1.html"
+
+b.
+RewriteEngine On
+RewriteCond "%{QUERY_STRING}" "(.*)"
+RewriteRule "^(.*)$" /lab1/$1? [R=301,L]
+
+b.
+RewriteEngine On
+RewriteCond "%{QUERY_STRING}" "val"
+RewriteRule ^/page1.html$ /page2.html [R=301,L]
+
+
+4.
+sudo mkdir /www/os
+sudo os
+sudo nano /etc/hosts
+
+cd /etc/apache2
+sudo nano /etc/apache2/sites-available/os.conf
+
+<VirtualHost *:80>
+    ServerName os.iti
+    DocumentRoot /var/www/os
+    ServerAdmin webmaster@example.com
+ErrorLog "/www/logs/www2/error_log"
+CustomLog "/www/logs/www2/access_log" combined
+
+  
+</VirtualHost>
+
+  <Directory "/var/www/os">
+        Options FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+    
+sudo a2ensite os.conf
+
