@@ -1,3 +1,0 @@
-In Python, arrays are not as commonly used as other data structures like lists or dictionaries, because Python provides many built-in features that can be used to perform operations that are typically done with arrays in other languages.
-
-However, arrays can still be useful in certain situations, and Python provides several libraries for working with arrays, such as NumPy and Python's built-in array module.
