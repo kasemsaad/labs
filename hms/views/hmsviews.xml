@@ -1,0 +1,74 @@
+<odoo>
+  <data>
+    <record id="patients_action" model="ir.actions.act_window">
+      <field name="name">Patients</field>
+      <field name="res_model">db.hms</field>
+      <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record id='patient_tree_view' model='ir.ui.view'>
+      <field name="name">Patient tree view</field>
+      <field name="model">db.hms</field>
+      <field name="arch" type="xml">
+      <tree>
+      <field name='first_name' />
+      <field name='lirst_name' />
+      <field name='history' />
+      </tree>
+       </field>
+    </record>
+    <record id='patient_form_view' model='ir.ui.view'>
+      <field name="name">Patient form view</field>
+      <field name="model">db.hms</field>
+      <field name="arch" type="xml">
+      <form>
+<sheet>
+<group>
+<group string="patient">
+      <field name='first_name' />
+      <field name='lirst_name' />
+      <field name='date_birth' />
+      <field name='Image' />
+      <field name='Address' />
+      <field name='age' />
+      <field name='email' />
+</group>
+<group string="patient data">
+      <field name='cr_ratio' attrs="{'required' : [('PCR' , '=' , True)]}" />
+      <field name='PCR'  />
+      <field name='blood_type' />
+<field name="history" attrs="{'invisible': [('age', '&lt;', 50)]}"/>
+</group>
+</group>
+<notebook>
+  <page string = 'Doctor information'>
+   <group>
+    <field name="doctor_id" attrs="{'readonly':[('department_id' , '=' , False)]}"/>
+     </group>
+       </page>
+  <page string = 'Department information' >
+   <group>
+    <field name="department_id"  domain ="[('Is_opened' ,'=' , True )]" />
+     </group>
+       </page> 
+   <page string = 'level logs'  groups = "hms.managers_group">
+   <group>    
+    <field name="level_logs" >
+    <tree>
+    <field name="create_uid"  />
+    <field name="create_date"  />
+    <field name="description"  />
+    </tree>
+    </field>
+     </group>
+       </page>       
+       </notebook>
+</sheet>
+      </form>
+       </field>
+    </record>
+
+    <menuitem id="hms_menu" name="HMS"  />
+    <menuitem id="patients_menu" parent="hms_menu" name="Patients" action="patients_action"  groups = "hms.managers_group,hms.users_group" />
+  </data>
+</odoo>
