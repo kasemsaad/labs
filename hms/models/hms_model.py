@@ -77,13 +77,13 @@ class Hms_model(models.Model):
             }
             self.env['db.hms.log'].create(vals)
             
-     @api.depends('birth_date')
+     @api.depends('date_birth')
         def _compute_age(self):
             for rec in self:
-                if rec.birth_date:
+                if rec.date_birth:
                     today = date.today()
-                    rec.age = today.year - rec.birth_date.year - (
-                            (today.month, today.day) < (rec.birth_date.month, rec.birth_date.day))
+                    rec.age = today.year - rec.date_birth.year - (
+                            (today.month, today.day) < (rec.date_birth.month, rec.date_birth.day))
                 else:
                     rec.age = 4
 
