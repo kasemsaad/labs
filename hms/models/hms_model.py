@@ -76,3 +76,14 @@ class Hms_model(models.Model):
                 'pationt_id' :self.id
             }
             self.env['db.hms.log'].create(vals)
+            
+     @api.depends('birth_date')
+        def _compute_age(self):
+            for rec in self:
+                if rec.birth_date:
+                    today = date.today()
+                    rec.age = today.year - rec.birth_date.year - (
+                            (today.month, today.day) < (rec.birth_date.month, rec.birth_date.day))
+                else:
+                    rec.age = 4
+
