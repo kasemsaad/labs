@@ -1,0 +1,22 @@
+{%extends 'parent.html'%}
+
+{%block title%}
+        Add book
+        {%endblock%}
+
+
+        {%block header%}
+add book
+        {%endblock%}
+        {%block content%}
+        <form method="post" enctype="multipart/form-data">
+                {%csrf_token%}
+                {{form}}
+                <input type="submit" value="update">
+            </form>
+            <div style="color:red">
+                {{msg}}
+            </div>
+        {%endblock%}
+
+        
