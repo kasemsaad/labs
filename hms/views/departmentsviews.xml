@@ -1,0 +1,43 @@
+<odoo>
+  <data>
+    <record id="Departments_action" model="ir.actions.act_window">
+      <field name="name">Departments</field>
+      <field name="res_model">db.departments</field>
+      <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record id='Department_tree_view' model='ir.ui.view'>
+      <field name="name">Department tree view</field>
+      <field name="model">db.departments</field>
+      <field name="arch" type="xml">
+      <tree>
+      <field name='name' />
+      <field name='capacity' />
+      <field name='Is_opened' />
+      </tree>
+       </field>
+    </record>
+    <record id='Department_form_view' model='ir.ui.view'>
+      <field name="name">Department form view</field>
+      <field name="model">db.departments</field>
+      <field name="arch" type="xml">
+      <form>
+<sheet>
+<group>
+<group string="Doctor">
+      <field name='name' />
+      <field name='capacity' />
+      <field name='Is_opened' />
+
+</group>
+</group>
+
+</sheet>
+
+      </form>
+       </field>
+    </record>
+
+    <menuitem id="departments_menu" parent="hms_menu" name="Departments" action="Departments_action"  />
+  </data>
+</odoo>
